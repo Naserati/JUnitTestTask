@@ -1,0 +1,31 @@
+*.iml
+.idea/
+*.class
+# Package Files #
+#*.jar
+*.war
+*.ear
+*.log
+.project
+.metadata
+target/
+bin/**
+tmp/**
+tmp/**/*
+chromeProfile/TemporaryProfile/**
+*.tmp
+*.bak
+local.properties
+DebugMode.properties
+.classpath
+.settings/
+.loadpath
+# Locally stored "Eclipse launch configurations"
+*.launch
+*.classpath
+*.project
+*.settings
+.allure/
+allure-results/
+#ZIP excluded from ignore in order to add IntelliJBehave.zip plugin
+#*.zip
