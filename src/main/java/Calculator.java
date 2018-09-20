@@ -6,6 +6,7 @@ import java.util.ArrayList;
 public class Calculator {
 
     private double result = 0;
+    private boolean err = false;
 
     /**
      * Метод для запуска программы "Калькулятор"
@@ -14,9 +15,12 @@ public class Calculator {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         System.out.println("Введите выражение: ");
         String expression = reader.readLine();
-        System.out.print("Результат: ");
-        System.out.printf("%.3f", calculate(expression));
-        System.out.println();
+        result = calculate(expression);
+        if (!err) {
+            System.out.print("Результат: ");
+            System.out.printf("%.3f", result);
+            System.out.println();
+        }
     }
 
     public double calculate(String expression) {
@@ -80,9 +84,7 @@ public class Calculator {
             }
             break;
         }
-
         return result;
-
     }
 
     public void operations(ArrayList<String> list) {
@@ -102,10 +104,14 @@ public class Calculator {
                     if (list.get(i).equals("/")) {
                         try {
                             if (Double.parseDouble(list.get(i + 1)) == 0) {
-                                throw new NumberFormatException();
+                                err = true;
+                                throw new ArithmeticException();
+                            } else {
+
                             }
-                        } catch (NumberFormatException e) {
+                        } catch (ArithmeticException e) {
                             System.err.println("На ноль делить нельзя");
+                            System.exit(0);
                         }
                         result = Double.parseDouble(list.get(i - 1)) / Double.parseDouble(list.get(i + 1));
                         list.remove(i + 1);
