@@ -15,11 +15,13 @@ public class Calculator {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         System.out.println("Введите выражение: ");
         String expression = reader.readLine();
-        result = calculate(expression);
-        if (!err) {
-            System.out.print("Результат: ");
-            System.out.printf("%.3f", result);
-            System.out.println();
+        if (checkExpression(expression)) {
+            result = calculate(expression);
+            if (!err) {
+                System.out.print("Результат: ");
+                System.out.printf("%.3f", result);
+                System.out.println();
+            }
         }
     }
 
@@ -145,5 +147,21 @@ public class Calculator {
                 }
             } else break;
         }
+    }
+
+    public boolean checkExpression(String expression) {
+
+        String regex = "[0-9+\\-=*/,.()]+";
+        boolean checking = expression.matches(regex);
+        try {
+            if (!checking) {
+                throw new ArithmeticException();
+            }
+        }
+        catch (ArithmeticException e){
+            System.err.println("Выражение введено неверно");
+            System.exit(0);
+        }
+        return expression.matches(regex);
     }
 }
